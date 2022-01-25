@@ -1,0 +1,16 @@
+version: '2'
+services:
+  client:
+    # Step 1 - Point build step to the client directory
+    build: './frontend'
+    ports:
+      # Step 2 - Add the port that the client application runs on - (port:port).
+      - '3000:3000'
+    depends_on:
+      - server
+  server:
+    build: './backend'
+    ports:
+    - '1337:1337'
+
+  
