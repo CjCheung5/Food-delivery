@@ -7,7 +7,7 @@ import { Container, Nav, NavItem } from "reactstrap";
 import AppContext from "./context";
 
 const Layout = (props) => {
-const title = "Welcome to Nextjs";
+const title = "Food Tiger | Food delivery service";
 const {user} = useContext(AppContext);
 
 
@@ -37,10 +37,10 @@ const {user} = useContext(AppContext);
             }
           `}
         </style>
-        <Nav className="navbar navbar-dark bg-dark">
+        <Nav className="navbar fixed-top navbar-dark bg-dark">
           <NavItem>
             <Link href="/">
-              <a className="navbar-brand">Home</a>
+              <a className="navbar-brand">Food Tiger</a>
             </Link>
           </NavItem>
           <NavItem className="ml-auto">

@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { Button, Card, CardBody, CardTitle, Badge } from "reactstrap";
 import AppContext from "./context"
 import Link from "next/link"
+import RestaurantList from '../components/restaurantList';
 // we can pass cart data in via props method 
 // the alternative is using useContext as below
 function Cart() {
   let isAuthenticated = true;
-  let {cart,addItem,removeItem} = useContext(AppContext);
+  let {cart,addItem,removeItem, restaurantID} = useContext(AppContext);
   //const [cartA, setCartA] = useState({cart})
   //cart = value.cart;
   //console.log('props:'+ JSON.stringify(value));
@@ -75,12 +76,12 @@ function Cart() {
 const checkoutItems = ()=>{
   return (
     <div>
-      <Badge style={{ width: 200, padding: 10 }} color="light">
+      <Badge style={{ width: "100%", padding: 10 }} color="light">
         <h5 style={{ fontWeight: 100, color: "gray" }}>Total:</h5>
         <h3>${cart.total}</h3>
       </Badge>
           <Link href="/checkout/">
-            <Button style={{ width: "60%" }} color="primary">
+            <Button style={{ width: "100%" }} color="primary">
               <a>Order</a>
             </Button>
           </Link>
@@ -89,10 +90,9 @@ const checkoutItems = ()=>{
 
 // return Cart
   return (
-    <div>
-      <h1> Cart</h1>
-      <Card style={{ padding: "10px 5px" }} className="cart">
-        <CardTitle style={{ margin: 10 }}>Your Order:</CardTitle>
+    <div className="cart-container">
+      <Card style={{ padding: "10px 5px", height: "100%" }} className="cart">
+        <CardTitle style={{ margin: 10 }}>Your Order: </CardTitle>
         <hr />
         <CardBody style={{ padding: 10 }}>
           <div style={{ marginBottom: 6 }}>
@@ -109,6 +109,13 @@ const checkoutItems = ()=>{
         </CardBody>
       </Card>
       <style jsx>{`
+        .cart-container{
+          position: fixed;
+          top:5%;
+          right:0;
+          width: 20%;
+          height: 100%;
+        }
         #item-price {
           font-size: 1.3em;
           color: rgba(97, 97, 97, 1);

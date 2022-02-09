@@ -40,8 +40,8 @@ function RestaurantList(props){
   if (!data) return <p>Not found</p>;
   console.log(`Query Data: ${data.restaurants}`)
 
- 
-// definet renderer for Dishes
+
+  // definet renderer for Dishes
 const renderDishes = (restaurantID, query) => {
   return (<Dishes restId={restaurantID} query={query}> </Dishes>)
 };
@@ -52,6 +52,7 @@ if(props.search){
       return res;
     }
   });
+
 
   if(searchQuery.length > 0){
     console.log("query>0")
@@ -70,29 +71,42 @@ if(props.search){
           </CardBody>
           <div className="card-footer">
           
-          <Button color="info" onClick={()=> setRestaurantID(res.id)}>{res.name}</Button>
+          <Button color="info" onClick={()=> {
+            setRestaurantID(res.id)
+            AppContext.restaurantID = res.id;
+            console.log(AppContext);
+          }}>{res.name}</Button>
            
           </div>
         </Card>
       </Col>
     ))
-  
+          
+    const ifRestaurantIDSearchDisplay = ()=>{
+      if(restaurantID>0){
+        return (
+          <InputGroup>
+                <InputGroupAddon addonType="append"> Search </InputGroupAddon>
+                <Input
+                    onChange={(e) =>
+                    setQuery(e.target.value.toLocaleLowerCase())
+                    }
+                    value={query}
+                />
+                </InputGroup>
+        )
+      } else{
+        return;
+      }
+    }
     return(
   
       <Container>
       <Row xs='3'>
         {restList}
       </Row>
-      <Row> 
-      <InputGroup>
-            <InputGroupAddon addonType="append"> Search </InputGroupAddon>
-            <Input
-                onChange={(e) =>
-                setQuery(e.target.value.toLocaleLowerCase())
-                }
-                value={query}
-            />
-            </InputGroup>
+      <Row>
+        {ifRestaurantIDSearchDisplay(restaurantID)}
         </Row>
       <Row xs='3'>
       {renderDishes(restaurantID, query)}
@@ -127,22 +141,33 @@ if(props.search){
       </Card>
     </Col>
   ))
+  
+  const ifRestaurantIDSearchDisplay = ()=>{
+    if(restaurantID>0){
+      return (
+        <InputGroup>
+              <InputGroupAddon addonType="append"> Search </InputGroupAddon>
+              <Input
+                  onChange={(e) =>
+                  setQuery(e.target.value.toLocaleLowerCase())
+                  }
+                  value={query}
+              />
+              </InputGroup>
+      )
+    } else{
+      return;
+    }
+  }
+
   return(
     <>
     <Container>
       <Row xs='3'>
         {fullRestList}
       </Row>
-      <Row> 
-      <InputGroup>
-            <InputGroupAddon addonType="append"> Search </InputGroupAddon>
-            <Input
-                onChange={(e) =>
-                setQuery(e.target.value.toLocaleLowerCase())
-                }
-                value={query}
-            />
-            </InputGroup>
+      <Row xs="3">
+        {ifRestaurantIDSearchDisplay(restaurantID)} 
         </Row>
       <Row xs='3'>
       {renderDishes(restaurantID, query)}

@@ -11,6 +11,7 @@ const AppContext = React.createContext(
         addItem:()=>{},
         removeItem:()=>{},
         user: false,
-        setUser:()=>{}
+        setUser:()=>{},
+        restaurantID: 0
     });
 export default AppContext;
