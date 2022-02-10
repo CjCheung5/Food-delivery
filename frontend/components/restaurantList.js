@@ -22,6 +22,8 @@ function RestaurantList(props){
   const [state, setState] = useState(cart);
   const [query, setQuery] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const GET_RESTAURANTS = gql`
     query {
       restaurants {
@@ -34,6 +36,7 @@ function RestaurantList(props){
       }
     }
   `;
+
   const { loading, error, data } = useQuery(GET_RESTAURANTS)
   if (loading) return <p>Loading...</p>;
   if (error) return <p>ERROR</p>;
@@ -63,7 +66,7 @@ if(props.search){
             top={true}
             style={{ height: 200 }}
             src={
-            `http://localhost:1337`+ res.image.url
+            API_URL+ res.image.url
             }
           />
           <CardBody>
@@ -127,7 +130,7 @@ if(props.search){
           top={true}
           style={{ height: 200 }}
           src={
-          `http://localhost:1337`+ res.image.url
+          API_URL+ res.image.url
           }
         />
         <CardBody>

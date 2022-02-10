@@ -3,6 +3,7 @@ services:
   client:
     # Step 1 - Point build step to the client directory
     build: './frontend'
+    image: cjcheung5/restaurantapp:client
     ports:
       # Step 2 - Add the port that the client application runs on - (port:port).
       - '3000:3000'
@@ -10,6 +11,7 @@ services:
       - server
   server:
     build: './backend'
+    image: cjcheung5/restaurantapp:strapi
     ports:
     - '1337:1337'
 

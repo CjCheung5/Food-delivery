@@ -1,4 +1,4 @@
-FROM node:slim
+FROM strapi/strapi
 
 # Step 1 - Add container working directory
 WORKDIR /app
